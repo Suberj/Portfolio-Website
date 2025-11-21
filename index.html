@@ -11,7 +11,8 @@
             --card-bg: #111;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
-            --accent-green: #00ff41;
+            /* High-Voltage Yellow to match logo */
+            --accent-yellow: #ffee00; 
             --accent-orange: #ff5f00;
             --border-color: #333;
             --font-heading: 'Inter', sans-serif;
@@ -65,7 +66,7 @@
             font-size: 2rem;
             margin-bottom: 40px;
             display: inline-block;
-            border-bottom: 4px solid var(--accent-green);
+            border-bottom: 4px solid var(--accent-yellow);
             padding-bottom: 5px;
         }
 
@@ -76,12 +77,12 @@
         }
 
         .highlight-orange { color: var(--accent-orange); }
-        .highlight-green { color: var(--accent-green); }
+        .highlight-yellow { color: var(--accent-yellow); }
         
         .mono {
             font-family: var(--font-mono);
             font-size: 0.85rem;
-            color: var(--accent-green);
+            color: var(--accent-yellow);
         }
 
         /* --- BUTTONS --- */
@@ -102,7 +103,7 @@
         .btn:hover {
             background: var(--accent-orange);
             color: #000;
-            box-shadow: 4px 4px 0 var(--accent-green);
+            box-shadow: 4px 4px 0 var(--accent-yellow);
             transform: translate(-2px, -2px);
         }
 
@@ -120,7 +121,7 @@
 
         /* --- LAYOUT --- */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -150,6 +151,16 @@
             width: 100%;
         }
 
+        /* LOGO ANIMATIONS */
+        @keyframes robotIdle {
+            0%, 90% { transform: translateY(0) rotate(0deg); }
+            92% { transform: translateY(-3px) rotate(-5deg); }
+            94% { transform: translateY(-3px) rotate(5deg); }
+            96% { transform: translateY(-3px) rotate(-3deg); }
+            98% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
         .logo-link {
             display: flex;
             align-items: center;
@@ -159,38 +170,41 @@
         .logo-img {
             height: 60px;
             width: auto;
+            animation: robotIdle 10s ease-in-out infinite;
+            transform-origin: center center;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .logo-link:hover .logo-img {
-            transform: scale(1.1) rotate(5deg);
+            animation: none; 
+            transform: scale(1.1) rotate(10deg);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 25px;
         }
 
         .nav-links a {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             font-family: var(--font-mono);
         }
 
         .nav-links a:hover {
-            color: var(--accent-green);
+            color: var(--accent-yellow);
         }
 
         .resume-link {
-            border: 1px solid var(--accent-green);
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow) !important;
             padding: 5px 15px;
-            color: var(--accent-green) !important;
         }
 
         .resume-link:hover {
-            background: var(--accent-green);
+            background: var(--accent-yellow);
             color: #000 !important;
         }
 
@@ -256,8 +270,8 @@
         }
 
         .timeline-item:hover .timeline-dot {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
+            background: var(--accent-yellow);
+            border-color: var(--accent-yellow);
         }
 
         .timeline-content {
@@ -268,7 +282,7 @@
         }
 
         .timeline-item:hover .timeline-content {
-            border-color: var(--accent-green);
+            border-color: var(--accent-yellow);
             transform: translateX(10px);
         }
 
@@ -281,7 +295,7 @@
         }
 
         .job-role {
-            color: var(--accent-green);
+            color: var(--accent-yellow);
             font-family: var(--font-mono);
             font-size: 0.9rem;
             margin-bottom: 15px;
@@ -339,8 +353,8 @@
             transition: 0.2s;
         }
         .pill:hover {
-            border-color: var(--accent-green);
-            color: var(--accent-green);
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
         }
 
         /* --- MODALS --- */
@@ -443,6 +457,9 @@
                 <a href="#experience">Experience</a>
                 <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
+                <a href="https://github.com/Suberj" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/joshua-suber/" target="_blank">LinkedIn</a>
+                
                 <a href="./assets/Resume.pdf" target="_blank" class="resume-link">View Resume</a>
             </div>
         </div>
@@ -471,7 +488,7 @@
             <div class="about-grid">
                 <div>
                     <p style="margin-bottom: 20px;">
-                        I am a senior at <span class="highlight-green">Rensselaer Polytechnic Institute</span> pursuing dual degrees in Computer Systems Engineering and Electrical Engineering with a minor in Graphic Design.
+                        I am a senior at <span class="highlight-yellow">Rensselaer Polytechnic Institute</span> pursuing dual degrees in Computer Systems Engineering and Electrical Engineering with a minor in Graphic Design.
                     </p>
                     <p>
                         Currently, I work as an RF Engineer Intern at R.A. Woods Associates and previously co-founded LiftRyte, a startup focused on fitness tech. I am eager to apply my interdisciplinary knowledge in fields like computer hardware design, computer architecture, and software engineering.
@@ -483,7 +500,7 @@
                         <span class="mono">GPA</span>
                     </div>
                     <div class="stat-card">
-                        <h4 class="highlight-green">2026</h4>
+                        <h4 class="highlight-yellow">2026</h4>
                         <span class="mono">Graduation</span>
                     </div>
                 </div>
@@ -503,9 +520,9 @@
                         <h3>R.A. Woods Associates</h3>
                         <span class="job-role">RF Engineer / Software Engineer Intern</span>
                         <ul style="list-style-position: inside; color: var(--text-muted); font-size: 0.95rem;">
-                            [cite_start]<li>Led technical characterization for EW Configurable Filter Modules (EWCFM)[cite: 160].</li>
-                            [cite_start]<li>Analyzed S-parameters (2-18 GHz) using Vector Network Analyzers (VNA)[cite: 160].</li>
-                            [cite_start]<li>Developed Python automation scripts to parse test data and generate BOMs from DipTrace[cite: 161].</li>
+                            <li>Led technical characterization for EW Configurable Filter Modules (EWCFM).</li>
+                            <li>Analyzed S-parameters (2-18 GHz) using Vector Network Analyzers (VNA).</li>
+                            <li>Developed Python automation scripts to parse test data and generate BOMs from DipTrace.</li>
                         </ul>
                     </div>
                 </div>
@@ -517,9 +534,9 @@
                         <h3>LiftRyte (Start-up)</h3>
                         <span class="job-role">Co-Founder & Lead Developer</span>
                         <ul style="list-style-position: inside; color: var(--text-muted); font-size: 0.95rem;">
-                            [cite_start]<li>Co-founded app company focused on helping weightlifters correct form in real-time[cite: 164].</li>
-                            [cite_start]<li>Utilized React Native to program the app for both iOS and Android[cite: 165].</li>
-                            [cite_start]<li>Created all graphics and marketing materials[cite: 166].</li>
+                            <li>Co-founded app company focused on helping weightlifters correct form in real-time.</li>
+                            <li>Utilized React Native to program the app for both iOS and Android.</li>
+                            <li>Created all graphics and marketing materials.</li>
                         </ul>
                     </div>
                 </div>
@@ -531,8 +548,8 @@
                         <h3>PAR Government Systems</h3>
                         <span class="job-role">Software Engineer Internship</span>
                         <ul style="list-style-position: inside; color: var(--text-muted); font-size: 0.95rem;">
-                            [cite_start]<li>Analyzed software engineer codebases and performed troubleshooting[cite: 168].</li>
-                            [cite_start]<li>Gained proficiency in enterprise-level programming workflows[cite: 168].</li>
+                            <li>Analyzed software engineer codebases and performed troubleshooting.</li>
+                            <li>Gained proficiency in enterprise-level programming workflows.</li>
                         </ul>
                     </div>
                 </div>
@@ -548,7 +565,7 @@
             <div class="project-grid">
                 
                 <div class="project-card" onclick="openModal('m-liftryte')">
-                    <h3 class="highlight-orange">LiftRyte App</h3>
+                    <h3>LiftRyte App</h3>
                     <p style="color: #999; margin-top: 10px;">Real-time weightlifting form correction app for iOS & Android.</p>
                     <div class="tech-stack-mini">React Native • Start-up • Full Stack</div>
                 </div>
@@ -698,11 +715,11 @@
             <div class="modal-split">
                 <div>
                     <p style="color: #ccc; margin-bottom: 15px;">
-                        [cite_start]Co-founded a start-up focused on helping weightlifters correct form in real-time[cite: 164].
+                        Co-founded a start-up focused on helping weightlifters correct form in real-time.
                         I was the lead developer, utilizing React Native to build the application for both iOS and Android platforms.
                     </p>
                     <p style="color: #ccc;">
-                        [cite_start]In addition to the technical stack, I was responsible for the creation of all in-app graphics, UI/UX design, and marketing materials[cite: 166].
+                        In addition to the technical stack, I was responsible for the creation of all in-app graphics, UI/UX design, and marketing materials.
                     </p>
                 </div>
                 <div>
@@ -721,10 +738,10 @@
             <div class="modal-split">
                 <div>
                     <p style="color: #ccc; margin-bottom: 15px;">
-                        Designed and implemented a Full State Feedback control system to stabilize an inverted pendulum robot. [cite_start]Derived State-Space equations of motion and utilized Linear Quadratic Regulator (LQR) theory to calculate optimal gain matrices [cite: 173-174].
+                        Designed and implemented a Full State Feedback control system to stabilize an inverted pendulum robot. Derived State-Space equations of motion and utilized Linear Quadratic Regulator (LQR) theory to calculate optimal gain matrices.
                     </p>
                     <p style="color: #ccc;">
-                        [cite_start]Developed a Simulink model to process real-time Gyroscope and Encoder data, tuning Q and R weighting matrices to minimize state error[cite: 175].
+                        Developed a Simulink model to process real-time Gyroscope and Encoder data, tuning Q and R weighting matrices to minimize state error.
                     </p>
                 </div>
                 <div>
@@ -743,10 +760,10 @@
             <div class="modal-split">
                 <div>
                     <p style="color: #ccc; margin-bottom: 15px;">
-                        Developed a cross-platform mobile app with real-time air quality monitoring and hazard alerts using React Native and AWS IoT. [cite_start]Integrated dynamic safety notifications, multilingual support, and user-friendly customization features [cite: 178-179].
+                        Developed a cross-platform mobile app with real-time air quality monitoring and hazard alerts using React Native and AWS IoT. Integrated dynamic safety notifications, multilingual support, and user-friendly customization features.
                     </p>
                     <p style="color: #ccc;">
-                         [cite_start]Enabled seamless communication between fire sensors and mobile devices ensuring prompt alerts for smoke, gas, and CO detection[cite: 180].
+                         Enabled seamless communication between fire sensors and mobile devices ensuring prompt alerts for smoke, gas, and CO detection.
                     </p>
                 </div>
                 <div>
@@ -765,10 +782,10 @@
             <div class="modal-split">
                 <div>
                     <p style="color: #ccc; margin-bottom: 15px;">
-                        [cite_start]Designed and implemented a system that converts AC power from wind turbines and DC power from solar panels into a unified DC output[cite: 182].
+                        Designed and implemented a system that converts AC power from wind turbines and DC power from solar panels into a unified DC output.
                     </p>
                     <p style="color: #ccc;">
-                        Integrated a step-up transformer, rectifier, and filter circuits to stabilize voltage for renewable energy applications. [cite_start]Simulated, built, and tested key components like RC/RLC circuits [cite: 183-184].
+                        Integrated a step-up transformer, rectifier, and filter circuits to stabilize voltage for renewable energy applications. Simulated, built, and tested key components like RC/RLC circuits.
                     </p>
                 </div>
                 <div>
@@ -786,10 +803,10 @@
             <div class="modal-split">
                 <div>
                     <p style="color: #ccc; margin-bottom: 15px;">
-                        [cite_start]Developed a low-cost, educational line-following robot using an Arduino Uno, IR sensors, and H-Bridge drivers for motor control[cite: 186].
+                        Developed a low-cost, educational line-following robot using an Arduino Uno, IR sensors, and H-Bridge drivers for motor control.
                     </p>
                     <p style="color: #ccc;">
-                        [cite_start]Implemented a PID control algorithm to enhance the robot's ability to follow lines smoothly with minimal oscillation[cite: 187].
+                        Implemented a PID control algorithm to enhance the robot's ability to follow lines smoothly with minimal oscillation.
                     </p>
                 </div>
                 <div>
@@ -852,7 +869,7 @@
             <div class="modal-split">
                 <div>
                     <p style="color: #ccc; margin-bottom: 15px;">
-                        [cite_start]Advanced coursework focused on the principles of typography, including type hierarchy, grid systems, and expressive type[cite: 135].
+                        Advanced coursework focused on the principles of typography, including type hierarchy, grid systems, and expressive type.
                     </p>
                     <p style="color: #ccc;">
                         Explored the historical context of type design (such as the Bauhaus movement) and applied these concepts to modern layout and interface design challenges.
