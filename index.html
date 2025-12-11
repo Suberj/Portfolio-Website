@@ -11,7 +11,6 @@
             --card-bg: #111;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
-            /* High-Voltage Yellow to match logo */
             --accent-yellow: #ffee00; 
             --accent-orange: #ff5f00;
             --border-color: #333;
@@ -149,6 +148,39 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+        }
+
+        /* --- SLIDESHOW CONTROLS (Add to CSS) --- */
+        .slideshow-arrows {
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%);
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0 10px; 
+            z-index: 5;
+            pointer-events: none; /* Allows clicking through to the image if not on button */
+        }
+
+        .slideshow-btn {
+            pointer-events: auto; 
+            cursor: pointer; 
+            background: rgba(0,0,0,0.8); 
+            color: var(--accent-yellow); 
+            border: 1px solid var(--accent-yellow);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .slideshow-btn:hover {
+            background: var(--accent-yellow);
+            color: #000;
         }
 
         /* LOGO ANIMATIONS */
@@ -378,7 +410,7 @@
             background: #0f0f0f;
             border: 2px solid var(--accent-orange);
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             max-height: 90vh;
             overflow-y: auto;
             padding: 40px;
@@ -395,6 +427,7 @@
             color: var(--text-muted);
             font-size: 2rem;
             cursor: pointer;
+            z-index: 10;
         }
         .close-btn:hover { color: var(--accent-orange); }
 
@@ -416,6 +449,102 @@
             color: #555;
             font-family: var(--font-mono);
             margin-bottom: 15px;
+        }
+        
+        /* --- MEDIA GRID (Used inside Modals) --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .media-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid #333;
+            background: #000;
+            transition: border-color 0.2s;
+        }
+
+        .media-item:hover {
+            border-color: var(--accent-yellow);
+        }
+
+
+        .media-item video, .media-item object, .media-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: contain; /* CHANGED from 'cover' to 'contain' to show full image */
+        display: block;
+        background: #000; /* Adds a black background for images with different aspect ratios */
+        }
+
+        /* Overlay icon for clickable media */
+        .media-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .media-item:hover .media-overlay { opacity: 1; }
+        .media-overlay span {
+            color: #fff;
+            background: var(--accent-orange);
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+        }
+
+        .media-caption {
+            font-size: 0.7rem;
+            color: var(--accent-yellow);
+            font-family: var(--font-mono);
+            padding: 5px;
+            background: #111;
+            display: block;
+            text-align: center;
+        }
+
+        /* --- LIGHTBOX (FULL SCREEN VIEWER) --- */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        
+        #lightbox.active { display: flex; }
+
+        #lightbox-content {
+            max-width: 95%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #lightbox-content video, 
+        #lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        #lightbox-content iframe {
+            width: 80vw;
+            height: 85vh;
+            border: 2px solid var(--accent-yellow);
+            background: #fff;
         }
 
         /* --- FOOTER --- */
@@ -442,6 +571,8 @@
             .about-grid, .modal-split { grid-template-columns: 1fr; }
             .timeline { padding-left: 30px; }
             .timeline-dot { left: -32px; }
+            .video-grid { grid-template-columns: 1fr; }
+            #lightbox-content iframe { width: 95vw; }
         }
     </style>
 </head>
@@ -459,7 +590,6 @@
                 <a href="#skills">Skills</a>
                 <a href="https://github.com/Suberj" target="_blank">GitHub</a>
                 <a href="https://www.linkedin.com/in/joshua-suber/" target="_blank">LinkedIn</a>
-                
                 <a href="./assets/Resume.pdf" target="_blank" class="resume-link">View Resume</a>
             </div>
         </div>
@@ -511,7 +641,6 @@
     <section id="experience">
         <div class="container">
             <h2>02. Experience</h2>
-            
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
@@ -526,7 +655,6 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -540,7 +668,6 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
@@ -561,63 +688,52 @@
         <div class="container">
             <h2>03. Projects</h2>
             <p class="mono" style="margin-bottom: 30px;">[ Click cards for details ]</p>
-            
             <div class="project-grid">
-                
                 <div class="project-card" onclick="openModal('m-liftryte')">
                     <h3>LiftRyte App</h3>
                     <p style="color: #999; margin-top: 10px;">Real-time weightlifting form correction app for iOS & Android.</p>
                     <div class="tech-stack-mini">React Native • Start-up • Full Stack</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-minseg')">
                     <h3>MinSeg Robot</h3>
                     <p style="color: #999; margin-top: 10px;">Self-balancing inverted pendulum robot stabilized using LQR control theory.</p>
                     <div class="tech-stack-mini">MATLAB • Simulink • Arduino</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-fire')">
                     <h3>Smart Fire Alarm</h3>
                     <p style="color: #999; margin-top: 10px;">Real-time air quality monitoring app utilizing AWS IoT and MQTT.</p>
                     <div class="tech-stack-mini">React Native • AWS IoT • RPi</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-power')">
                     <h3>Power System</h3>
                     <p style="color: #999; margin-top: 10px;">AC/DC conversion system for wind turbines and solar panels.</p>
                     <div class="tech-stack-mini">LTSpice • Circuit Design</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-bot')">
                     <h3>Auto Line Bot</h3>
                     <p style="color: #999; margin-top: 10px;">Autonomous robot utilizing PID algorithms for smooth navigation.</p>
                     <div class="tech-stack-mini">C++ • Arduino • PID</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-cad')">
                     <h3>Engineering Graphics</h3>
                     <p style="color: #999; margin-top: 10px;">3D modeling of parts and assemblies using Siemens NX CAD software.</p>
                     <div class="tech-stack-mini">Siemens NX • CAD • 3D Modeling</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-motion')">
                     <h3>2D Motion Graphics</h3>
                     <p style="color: #999; margin-top: 10px;">Communicating effectively using motion graphics, animation, and typography.</p>
                     <div class="tech-stack-mini">Animation • Typography • Storytelling</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-type')">
                     <h3>Typography</h3>
                     <p style="color: #999; margin-top: 10px;">Advanced exploration of type hierarchy, layout, and font design principles.</p>
                     <div class="tech-stack-mini">Type Design • Layout • Hierarchy</div>
                 </div>
-
                 <div class="project-card" onclick="openModal('m-graphic')">
                     <h3>Graphic Design</h3>
                     <p style="color: #999; margin-top: 10px;">Exploration of 2D design principles: form, color, type, and image integration.</p>
                     <div class="tech-stack-mini">Illustrator • Branding • Layout</div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -625,65 +741,38 @@
     <section id="skills">
         <div class="container">
             <h2>04. Skills</h2>
-            
             <div class="skill-group">
                 <span class="skill-label">LANGUAGES & CODE</span>
                 <div class="skill-pills">
-                    <div class="pill">Python</div>
-                    <div class="pill">C++</div>
-                    <div class="pill">C</div>
-                    <div class="pill">R</div>
-                    <div class="pill">JavaScript</div>
-                    <div class="pill">React Native</div>
-                    <div class="pill">MIPS</div>
-                    <div class="pill">VHDL</div>
-                    <div class="pill">Programming</div>
+                    <div class="pill">Python</div><div class="pill">C++</div><div class="pill">C</div><div class="pill">R</div>
+                    <div class="pill">JavaScript</div><div class="pill">React Native</div><div class="pill">MIPS</div>
+                    <div class="pill">VHDL</div><div class="pill">Programming</div>
                 </div>
             </div>
-
             <div class="skill-group">
                 <span class="skill-label">ENGINEERING & HARDWARE</span>
                 <div class="skill-pills">
-                    <div class="pill">LTspice</div>
-                    <div class="pill">Simulink</div>
-                    <div class="pill">MatLab</div>
-                    <div class="pill">Vivado</div>
-                    <div class="pill">LogicWorks</div>
-                    <div class="pill">DipTrace</div>
-                    <div class="pill">NX</div>
-                    <div class="pill">Power Supply</div>
-                    <div class="pill">Oscilloscope</div>
-                    <div class="pill">Spectrum Analyzer</div>
-                    <div class="pill">Multimeter</div>
-                    <div class="pill">Signal Generator</div>
-                    <div class="pill">Solder Iron</div>
-                    <div class="pill">Circuits</div>
+                    <div class="pill">LTspice</div><div class="pill">Simulink</div><div class="pill">MatLab</div>
+                    <div class="pill">Vivado</div><div class="pill">LogicWorks</div><div class="pill">DipTrace</div>
+                    <div class="pill">NX</div><div class="pill">Power Supply</div><div class="pill">Oscilloscope</div>
+                    <div class="pill">Spectrum Analyzer</div><div class="pill">Multimeter</div>
+                    <div class="pill">Signal Generator</div><div class="pill">Solder Iron</div><div class="pill">Circuits</div>
                 </div>
             </div>
-
             <div class="skill-group">
                 <span class="skill-label">DESIGN & MEDIA</span>
                 <div class="skill-pills">
-                    <div class="pill">Illustrator</div>
-                    <div class="pill">Photoshop</div>
-                    <div class="pill">InDesign</div>
-                    <div class="pill">After Effects</div>
-                    <div class="pill">Excel</div>
-                    <div class="pill">Design</div>
+                    <div class="pill">Illustrator</div><div class="pill">Photoshop</div><div class="pill">InDesign</div>
+                    <div class="pill">After Effects</div><div class="pill">Excel</div><div class="pill">Design</div>
                 </div>
             </div>
-
             <div class="skill-group">
                 <span class="skill-label">PROFESSIONAL SKILLS</span>
                 <div class="skill-pills">
-                    <div class="pill">Leadership</div>
-                    <div class="pill">Problem-Solving</div>
-                    <div class="pill">Collaboration</div>
-                    <div class="pill">Logical Thinking</div>
-                    <div class="pill">Adaptability</div>
-                    <div class="pill">Perseverance</div>
-                    <div class="pill">Quick Learner</div>
-                    <div class="pill">Time Management</div>
+                    <div class="pill">Leadership</div><div class="pill">Problem-Solving</div>
+                    <div class="pill">Collaboration</div><div class="pill">Logical Thinking</div>
+                    <div class="pill">Adaptability</div><div class="pill">Perseverance</div>
+                    <div class="pill">Quick Learner</div><div class="pill">Time Management</div>
                 </div>
             </div>
         </div>
@@ -692,17 +781,13 @@
     <footer id="contact">
         <div class="container">
             <h2 style="border:none; color: var(--accent-orange);">Get In Touch</h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px;">
-                Rome, NY • (315) 982-8135 • joshsuber3@gmail.com
-            </p>
-            
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Rome, NY • (315) 982-8135 • joshsuber3@gmail.com</p>
             <div class="social-row">
                 <a href="mailto:joshsuber3@gmail.com">Email</a>
                 <a href="https://www.linkedin.com/in/joshua-suber/" target="_blank">LinkedIn</a>
                 <a href="https://github.com/Suberj" target="_blank">GitHub</a>
                 <a href="./assets/Resume.pdf" target="_blank">Resume</a>
             </div>
-
             <p style="font-size: 0.8rem; opacity: 0.5;">© 2025 Joshua Suber. Built with Code.</p>
         </div>
     </footer>
@@ -714,127 +799,12 @@
             <p class="mono" style="margin-bottom: 20px;">React Native | iOS | Android | UI/UX Design</p>
             <div class="modal-split">
                 <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Co-founded a start-up focused on helping weightlifters correct form in real-time.
-                        I was the lead developer, utilizing React Native to build the application for both iOS and Android platforms.
-                    </p>
-                    <p style="color: #ccc;">
-                        In addition to the technical stack, I was responsible for the creation of all in-app graphics, UI/UX design, and marketing materials.
-                    </p>
+                    <p style="color: #ccc; margin-bottom: 15px;">Co-founded a start-up focused on helping weightlifters correct form in real-time. I was the lead developer, utilizing React Native to build the application for both iOS and Android platforms.</p>
+                    <p style="color: #ccc;">In addition to the technical stack, I was responsible for the creation of all in-app graphics, UI/UX design, and marketing materials.</p>
                 </div>
                 <div>
                     <div class="placeholder-media">[ App Demo Video ]</div>
                     <div class="placeholder-media" style="height:150px;">[ App Screenshot Gallery ]</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="m-minseg" class="modal-overlay" onclick="closeModal('m-minseg')">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeModal('m-minseg')">×</button>
-            <h3 class="highlight-orange">MinSeg Self-Balancing Robot</h3>
-            <p class="mono" style="margin-bottom: 20px;">MATLAB | Simulink | LQR Control</p>
-            <div class="modal-split">
-                <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Designed and implemented a Full State Feedback control system to stabilize an inverted pendulum robot. Derived State-Space equations of motion and utilized Linear Quadratic Regulator (LQR) theory to calculate optimal gain matrices.
-                    </p>
-                    <p style="color: #ccc;">
-                        Developed a Simulink model to process real-time Gyroscope and Encoder data, tuning Q and R weighting matrices to minimize state error.
-                    </p>
-                </div>
-                <div>
-                    <div class="placeholder-media">[ Video Demo Placeholder ]</div>
-                    <div class="placeholder-media">[ Simulink Diagram Placeholder ]</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="m-fire" class="modal-overlay" onclick="closeModal('m-fire')">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeModal('m-fire')">×</button>
-            <h3 class="highlight-orange">Smart Fire Alarm</h3>
-            <p class="mono" style="margin-bottom: 20px;">React Native | AWS IoT | MQTT</p>
-            <div class="modal-split">
-                <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Developed a cross-platform mobile app with real-time air quality monitoring and hazard alerts using React Native and AWS IoT. Integrated dynamic safety notifications, multilingual support, and user-friendly customization features.
-                    </p>
-                    <p style="color: #ccc;">
-                         Enabled seamless communication between fire sensors and mobile devices ensuring prompt alerts for smoke, gas, and CO detection.
-                    </p>
-                </div>
-                <div>
-                    <div class="placeholder-media">[ App Screenshot ]</div>
-                    <div class="placeholder-media">[ App Screenshot ]</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="m-power" class="modal-overlay" onclick="closeModal('m-power')">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeModal('m-power')">×</button>
-            <h3 class="highlight-orange">Renewable Power System</h3>
-            <p class="mono" style="margin-bottom: 20px;">LTSpice | Circuit Design</p>
-            <div class="modal-split">
-                <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Designed and implemented a system that converts AC power from wind turbines and DC power from solar panels into a unified DC output.
-                    </p>
-                    <p style="color: #ccc;">
-                        Integrated a step-up transformer, rectifier, and filter circuits to stabilize voltage for renewable energy applications. Simulated, built, and tested key components like RC/RLC circuits.
-                    </p>
-                </div>
-                <div>
-                    <div class="placeholder-media">[ Circuit Schematic ]</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="m-bot" class="modal-overlay" onclick="closeModal('m-bot')">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeModal('m-bot')">×</button>
-            <h3 class="highlight-orange">Line Following Robot</h3>
-            <p class="mono" style="margin-bottom: 20px;">Arduino | C++ | PID</p>
-            <div class="modal-split">
-                <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Developed a low-cost, educational line-following robot using an Arduino Uno, IR sensors, and H-Bridge drivers for motor control.
-                    </p>
-                    <p style="color: #ccc;">
-                        Implemented a PID control algorithm to enhance the robot's ability to follow lines smoothly with minimal oscillation.
-                    </p>
-                </div>
-                <div>
-                    <div class="placeholder-media">[ Robot Photo ]</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="m-cad" class="modal-overlay" onclick="closeModal('m-cad')">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeModal('m-cad')">×</button>
-            <h3 class="highlight-orange">Engineering Graphics & CAD</h3>
-            <p class="mono" style="margin-bottom: 20px;">Siemens NX | 3D Modeling | Engineering Design</p>
-            <div class="modal-split">
-                <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Utilized Siemens NX to create detailed solid models of engineering designs, including parts and complex assemblies. 
-                    </p>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Work includes visualization, orthographic and isometric free-hand sketching, and generating professional computer-aided design documentation.
-                    </p>
-                    <p style="color: #ccc;">
-                        <strong>Key Models:</strong> Garlic Press, Prop Shaft, Control Block, Tapered Drum.
-                    </p>
-                </div>
-                <div>
-                    <div class="placeholder-media">[ CAD Model Render ]</div>
                 </div>
             </div>
         </div>
@@ -855,28 +825,39 @@
                     </p>
                 </div>
                 <div>
-                    <div class="placeholder-media">[ Animation Still / Reel ]</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="m-type" class="modal-overlay" onclick="closeModal('m-type')">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeModal('m-type')">×</button>
-            <h3 class="highlight-orange">Typography</h3>
-            <p class="mono" style="margin-bottom: 20px;">Coursework (Fall 2025) | Type Design | Layout</p>
-            <div class="modal-split">
-                <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">
-                        Advanced coursework focused on the principles of typography, including type hierarchy, grid systems, and expressive type.
-                    </p>
-                    <p style="color: #ccc;">
-                        Explored the historical context of type design (such as the Bauhaus movement) and applied these concepts to modern layout and interface design challenges.
-                    </p>
-                </div>
-                <div>
-                    <div class="placeholder-media">[ Typography Specimen Sheet ]</div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Gallery</h4>
+                    <div class="video-grid">
+                        <div class="media-item" onclick="openLightbox('video', './assets/2D%20Motion%20Graphics/Animated%20Logo.mp4')">
+                            <video muted src="./assets/2D%20Motion%20Graphics/Animated%20Logo.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Logo</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('video', './assets/2D%20Motion%20Graphics/Credits.mp4')">
+                            <video muted src="./assets/2D%20Motion%20Graphics/Credits.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Credits</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('video', './assets/2D%20Motion%20Graphics/Kinetic%20Typography.mp4')">
+                            <video muted src="./assets/2D%20Motion%20Graphics/Kinetic%20Typography.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Typography</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('video', './assets/2D%20Motion%20Graphics/Promo%20Video.mp4')">
+                            <video muted src="./assets/2D%20Motion%20Graphics/Promo%20Video.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Promo</span>
+                        </div>
+                            <div class="media-item" onclick="openLightbox('video', './assets/2D%20Motion%20Graphics/Animated%20Infographic.mp4')">
+                            <video muted src="./assets/2D%20Motion%20Graphics/Animated%20Infographic.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Infographic</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('video', './assets/2D%20Motion%20Graphics/PSA.mp4')">
+                            <video muted src="./assets/2D%20Motion%20Graphics/PSA.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">PSA</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -898,13 +879,349 @@
                     </p>
                 </div>
                 <div>
-                    <div class="placeholder-media">[ Design Showcase ]</div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Gallery</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('video', './assets/Graphic%20Design/Project%206.mp4')">
+                            <video muted src="./assets/Graphic%20Design/Project%206.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Project 6 Video</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Graphic%20Design/Final%20logo.pdf')">
+                            <img src="./assets/logo.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder"> <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Final Logo</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Graphic%20Design/Poster%20final.pdf')">
+                            <img src="./assets/Graphic%20Design/Poster.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Poster</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Graphic%20Design/Cover%20final1.pdf')">
+                            <img src="./assets/Graphic%20Design/Cover.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Cover Design</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Graphic%20Design/Buisness%20Cards%20final.pdf')">
+                            <img src="./assets/Graphic%20Design/Card.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Business Cards</span>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="m-minseg" class="modal-overlay" onclick="closeModal('m-minseg')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('m-minseg')">×</button>
+            <h3 class="highlight-orange">MinSeg Self-Balancing Robot</h3>
+            <p class="mono" style="margin-bottom: 20px;">MATLAB | Simulink | LQR Control</p>
+            <div class="modal-split">
+                <div>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Designed and implemented a Full State Feedback control system to stabilize an inverted pendulum robot. Derived State-Space equations of motion and utilized Linear Quadratic Regulator (LQR) theory to calculate optimal gain matrices.
+                    </p>
+                    <p style="color: #ccc;">
+                        Developed a Simulink model to process real-time Gyroscope and Encoder data, tuning Q and R weighting matrices to minimize state error.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Gallery</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('video', './assets/Mechatronics/Segway/Video1.mp4')">
+                            <video muted src="./assets/Mechatronics/Segway/Video1.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Balance Test 1</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('video', './assets/Mechatronics/Segway/Video2.mp4')">
+                            <video muted src="./assets/Mechatronics/Segway/Video2.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Balance Test 2</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Mechatronics/Segway/robot.png')">
+                            <img src="./assets/Mechatronics/Segway/robot.png" alt="Robot Hardware">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Hardware Build</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Mechatronics/Segway/Main_simulink.png')">
+                            <img src="./assets/Mechatronics/Segway/Main_simulink.png" alt="Main Simulink Model">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Main Simulink Model</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Mechatronics/Segway/nonlinear_simulink.png')">
+                            <img src="./assets/Mechatronics/Segway/nonlinear_simulink.png" alt="Nonlinear Model">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Nonlinear Model</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Mechatronics/Segway/gyro_block.png')">
+                            <img src="./assets/Mechatronics/Segway/gyro_block.png" alt="Gyro Block Diagram">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Gyro Logic</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="m-fire" class="modal-overlay" onclick="closeModal('m-fire')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('m-fire')">×</button>
+            <h3 class="highlight-orange">Smart Fire Alarm</h3>
+            <p class="mono" style="margin-bottom: 20px;">React Native | AWS IoT | MQTT</p>
+            <div class="modal-split">
+                <div>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Developed a cross-platform mobile app with real-time air quality monitoring and hazard alerts using React Native and AWS IoT. Integrated dynamic safety notifications, multilingual support, and user-friendly customization features.
+                    </p>
+                    <p style="color: #ccc;">
+                         Enabled seamless communication between fire sensors and mobile devices ensuring prompt alerts for smoke, gas, and CO detection.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Gallery</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Smart%20Fire%20Detector/Report.pdf')">
+                            <img src="./assets/logo.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW REPORT</span></div>
+                            <span class="media-caption">Project Report</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8081.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8081.PNG" alt="Detector Image 1">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8082.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8082.PNG" alt="Detector Image 2">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8083.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8083.PNG" alt="Detector Image 3">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8084.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8084.PNG" alt="Detector Image 4">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8085.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8085.PNG" alt="Detector Image 5">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8086.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8086.PNG" alt="Detector Image 6">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8087.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8087.PNG" alt="Detector Image 7">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8088.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8088.PNG" alt="Detector Image 8">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8089.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8089.PNG" alt="Detector Image 9">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8090.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8090.PNG" alt="Detector Image 10">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8091.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8091.PNG" alt="Detector Image 11">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8092.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8092.PNG" alt="Detector Image 12">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8093.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8093.PNG" alt="Detector Image 13">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8094.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8094.PNG" alt="Detector Image 14">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8095.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8095.PNG" alt="Detector Image 15">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Smart%20Fire%20Detector/IMG_8096.PNG')">
+                            <img src="./assets/Smart%20Fire%20Detector/IMG_8096.PNG" alt="Detector Image 16">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="m-power" class="modal-overlay" onclick="closeModal('m-power')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('m-power')">×</button>
+            <h3 class="highlight-orange">Renewable Power System</h3>
+            <p class="mono" style="margin-bottom: 20px;">LTSpice | Circuit Design</p>
+            <div class="modal-split">
+                <div>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Designed and implemented a system that converts AC power from wind turbines and DC power from solar panels into a unified DC output.
+                    </p>
+                    <p style="color: #ccc;">
+                        Integrated a step-up transformer, rectifier, and filter circuits to stabilize voltage for renewable energy applications. Simulated, built, and tested key components like RC/RLC circuits.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Documentation</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Renewable%20Energy%20Grid/circuits%20ms1.pdf')">
+                            <img src="./assets/logo.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Circuit Milestone 1</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Renewable%20Energy%20Grid/circuits%20ms2.pdf')">
+                            <img src="./assets/logo.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Circuit Milestone 2</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Renewable%20Energy%20Grid/circuits%20ms3.pdf')">
+                            <img src="./assets/logo.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Circuit Milestone 3</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="m-bot" class="modal-overlay" onclick="closeModal('m-bot')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('m-bot')">×</button>
+            <h3 class="highlight-orange">Line Following Robot</h3>
+            <p class="mono" style="margin-bottom: 20px;">Arduino | C++ | PID</p>
+            <div class="modal-split">
+                <div>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Developed a low-cost, educational line-following robot using an Arduino Uno, IR sensors, and H-Bridge drivers for motor control.
+                    </p>
+                    <p style="color: #ccc;">
+                        [cite_start]Implemented a PID control algorithm to enhance the robot's ability to follow lines smoothly with minimal oscillation[cite: 187]. [cite_start]Designed the system to be a hands-on teaching tool for demonstrating robotics and control systems in educational settings[cite: 188].
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Gallery</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('video', './assets/Line%20Follower%20Robot/Video1.mp4')">
+                            <video muted src="./assets/Line%20Follower%20Robot/Video1.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Demo Video 1</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('video', './assets/Line%20Follower%20Robot/Video2.mp4')">
+                            <video muted src="./assets/Line%20Follower%20Robot/Video2.mp4"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Demo Video 2</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Line%20Follower%20Robot/Report.pdf')">
+                            <img src="./assets/logo.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder"> 
+                            <div class="media-overlay"><span>VIEW REPORT</span></div>
+                            <span class="media-caption">Project Report</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="m-cad" class="modal-overlay" onclick="closeModal('m-cad')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('m-cad')">×</button>
+            <h3 class="highlight-orange">Engineering Graphics & CAD</h3>
+            <p class="mono" style="margin-bottom: 20px;">Siemens NX | 3D Modeling</p>
+            <div class="modal-split">
+                <div><p style="color: #ccc;">Utilized Siemens NX to create detailed solid models of engineering designs.</p></div>
+                <div class="placeholder-media">[ CAD Render ]</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="m-type" class="modal-overlay" onclick="closeModal('m-type')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('m-type')">×</button>
+            <h3 class="highlight-orange">Typography</h3>
+            <p class="mono" style="margin-bottom: 20px;">Coursework (Fall 2025) | Type Design | Layout</p>
+            <div class="modal-split">
+                <div>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Advanced coursework focused on the principles of typography, including type hierarchy, grid systems, and expressive type.
+                    </p>
+                    <p style="color: #ccc;">
+                        Explored the historical context of type design (such as the Bauhaus movement) and applied these concepts to modern layout and interface design challenges.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Works</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Typography/Album.pdf')">
+                            <img src="./assets/Typography/AlbumCover.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Album Cover</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Typography/Project 1 - Final.pdf')">
+                            <img src="./assets/Typography/Project1.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Alphabet Zine</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Typography/Project2_Final_Revised_V2.pdf')">
+                            <img src="./assets/Typography/Project2.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Alignment Systems</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <button class="close-btn" style="top: 30px; right: 30px; font-size: 3rem;" onclick="closeLightbox()">×</button>
+        <div id="lightbox-content" onclick="event.stopPropagation()">
+            </div>
+    </div>
+
     <script>
+        // General Modal Logic
         function openModal(id) {
             document.getElementById(id).classList.add('active');
             document.body.classList.add('modal-open');
@@ -913,15 +1230,76 @@
             document.getElementById(id).classList.remove('active');
             document.body.classList.remove('modal-open');
         }
+
+        // Lightbox Logic
+        function openLightbox(type, url) {
+            const lb = document.getElementById('lightbox');
+            const content = document.getElementById('lightbox-content');
+            content.innerHTML = ''; // clear
+
+            if (type === 'video') {
+                content.innerHTML = `<video controls autoplay src="${url}"></video>`;
+            } else if (type === 'pdf') {
+                // Use iframe for PDF, with a fallback link
+                content.innerHTML = `
+                    <div style="text-align:center;">
+                        <iframe src="${url}"></iframe>
+                        <br>
+                        <a href="${url}" target="_blank" class="btn" style="margin-top:10px; display:inline-block;">Download / Open PDF</a>
+                    </div>
+                `;
+            } else if (type === 'image') {
+                content.innerHTML = `<img src="${url}">`;
+            }
+
+            lb.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            const content = document.getElementById('lightbox-content');
+            lb.classList.remove('active');
+            content.innerHTML = ''; // Stop video playback
+        }
+
         // Escape Key
         document.addEventListener('keydown', (e) => {
             if(e.key === "Escape") {
                 document.querySelectorAll('.modal-overlay').forEach(el => {
                     el.classList.remove('active');
-                    document.body.classList.remove('modal-open');
                 });
+                closeLightbox();
+                document.body.classList.remove('modal-open');
             }
         });
+
+        // --- ALBUM SLIDESHOW LOGIC ---
+        let albumIndex = 0;
+        const albumFiles = [
+            './assets/Typography/album cover_final.pdf',
+            './assets/Typography/label.pdf'
+        ];
+        const albumCaptions = [
+            'Album Cover (1/2)',
+            'Album Label (2/2)'
+        ];
+
+        function swapAlbum(e, direction) {
+            // Prevent opening the lightbox when clicking arrows
+            e.stopPropagation();
+
+            albumIndex = albumIndex + direction;
+            // Loop back if at end/start
+            if (albumIndex < 0) albumIndex = albumFiles.length - 1;
+            if (albumIndex >= albumFiles.length) albumIndex = 0;
+
+            // Update the onclick attribute so the lightbox opens the correct file
+            const container = document.getElementById('album-item');
+            container.setAttribute('onclick', `openLightbox('pdf', '${albumFiles[albumIndex]}')`);
+
+            // Update Caption
+            document.getElementById('album-caption').innerText = albumCaptions[albumIndex];
+        }
     </script>
 </body>
 </html>
