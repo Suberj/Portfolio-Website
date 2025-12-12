@@ -689,15 +689,25 @@
             <h2>03. Projects</h2>
             <p class="mono" style="margin-bottom: 30px;">[ Click cards for details ]</p>
             <div class="project-grid">
-                <div class="project-card" onclick="openModal('m-liftryte')">
-                    <h3>LiftRyte App</h3>
-                    <p style="color: #999; margin-top: 10px;">Real-time weightlifting form correction app for iOS & Android.</p>
-                    <div class="tech-stack-mini">React Native • Start-up • Full Stack</div>
-                </div>
                 <div class="project-card" onclick="openModal('m-minseg')">
                     <h3>MinSeg Robot</h3>
                     <p style="color: #999; margin-top: 10px;">Self-balancing inverted pendulum robot stabilized using LQR control theory.</p>
                     <div class="tech-stack-mini">MATLAB • Simulink • Arduino</div>
+                </div>
+                <div class="project-card" onclick="openModal('m-MagLev')">
+                    <h3>MagLev</h3>
+                    <p style="color: #999; margin-top: 10px;">Digital feedback control system to stably levitate a magnet.</p>
+                    <div class="tech-stack-mini">MATLAB • Simulink • Sisotool</div>
+                </div>
+                <div class="project-card" onclick="openModal('m-bot')">
+                    <h3>Auto Line Bot</h3>
+                    <p style="color: #999; margin-top: 10px;">Autonomous robot utilizing PID algorithms for smooth navigation.</p>
+                    <div class="tech-stack-mini">C++ • Arduino • PID</div>
+                </div>
+                <div class="project-card" onclick="openModal('m-liftryte')">
+                    <h3>LiftRyte App</h3>
+                    <p style="color: #999; margin-top: 10px;">Real-time weightlifting form correction app for iOS & Android.</p>
+                    <div class="tech-stack-mini">React Native • Start-up • Full Stack</div>
                 </div>
                 <div class="project-card" onclick="openModal('m-fire')">
                     <h3>Smart Fire Alarm</h3>
@@ -708,11 +718,6 @@
                     <h3>Power System</h3>
                     <p style="color: #999; margin-top: 10px;">AC/DC conversion system for wind turbines and solar panels.</p>
                     <div class="tech-stack-mini">LTSpice • Circuit Design</div>
-                </div>
-                <div class="project-card" onclick="openModal('m-bot')">
-                    <h3>Auto Line Bot</h3>
-                    <p style="color: #999; margin-top: 10px;">Autonomous robot utilizing PID algorithms for smooth navigation.</p>
-                    <div class="tech-stack-mini">C++ • Arduino • PID</div>
                 </div>
                 <div class="project-card" onclick="openModal('m-cad')">
                     <h3>Engineering Graphics</h3>
@@ -792,19 +797,75 @@
         </div>
     </footer>
 
-    <div id="m-liftryte" class="modal-overlay" onclick="closeModal('m-liftryte')">
+<div id="m-liftryte" class="modal-overlay" onclick="closeModal('m-liftryte')">
         <div class="modal-box" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal('m-liftryte')">×</button>
             <h3 class="highlight-orange">LiftRyte App</h3>
             <p class="mono" style="margin-bottom: 20px;">React Native | iOS | Android | UI/UX Design</p>
             <div class="modal-split">
                 <div>
-                    <p style="color: #ccc; margin-bottom: 15px;">Co-founded a start-up focused on helping weightlifters correct form in real-time. I was the lead developer, utilizing React Native to build the application for both iOS and Android platforms.</p>
-                    <p style="color: #ccc;">In addition to the technical stack, I was responsible for the creation of all in-app graphics, UI/UX design, and marketing materials.</p>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Co-founded a start-up focused on helping weightlifters correct form in real-time.
+                        I was the lead developer, utilizing React Native to build the application for both iOS and Android platforms.
+                    </p>
+                    <p style="color: #ccc;">
+                        In addition to the technical stack, I was responsible for the creation of machine learning model and training, all in-app graphics, UI/UX design, and marketing materials.
+                    </p>
                 </div>
+                
                 <div>
-                    <div class="placeholder-media">[ App Demo Video ]</div>
-                    <div class="placeholder-media" style="height:150px;">[ App Screenshot Gallery ]</div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">App Showcase</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/Logo1.png')">
+                            <img src="./assets/Liftryte/Logo1.png" alt="LiftRyte Logo 1">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Primary Logo</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/Logo3.png')">
+                            <img src="./assets/Liftryte/Logo3.png" alt="LiftRyte Logo 3">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Logo Variation</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/Logo2.png')">
+                            <img src="./assets/Liftryte/Logo2.png" alt="LiftRyte Logo 2">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Icon Logo</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/home.jpg')">
+                            <img src="./assets/Liftryte/home.jpg" alt="Home Screen">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Home Screen</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/signup.jpg')">
+                            <img src="./assets/Liftryte/signup.jpg" alt="Sign Up Screen">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Sign Up Flow</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/main.jpg')">
+                            <img src="./assets/Liftryte/main.jpg" alt="Main Interface">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Main Interface</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/deadlift.png')">
+                            <img src="./assets/Liftryte/deadlift.png" alt="Deadlift Analysis">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Deadlift Analysis</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/bench.png')">
+                            <img src="./assets/Liftryte/bench.png" alt="Bench Press Analysis">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Bench Analysis</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/Liftryte/squat.png')">
+                            <img src="./assets/Liftryte/squat.png" alt="Squat Analysis">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Squat Analysis</span>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -977,6 +1038,55 @@
             </div>
         </div>
     </div>
+
+    <div id="m-MagLev" class="modal-overlay" onclick="closeModal('m-MagLev')">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal('m-MagLev')">×</button>
+            <h3 class="highlight-orange">MinSeg Self-Balancing Robot</h3>
+            <p class="mono" style="margin-bottom: 20px;">MATLAB | Simulink | LQR Control</p>
+            <div class="modal-split">
+                <div>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Designed and implemented a Full State Feedback control system to stabilize an inverted pendulum robot. Derived State-Space equations of motion and utilized Linear Quadratic Regulator (LQR) theory to calculate optimal gain matrices.
+                    </p>
+                    <p style="color: #ccc;">
+                        Developed a Simulink model to process real-time Gyroscope and Encoder data, tuning Q and R weighting matrices to minimize state error.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Gallery</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('video', './assets/Mechatronics/MagLev/Demo.mov')">
+                            <video muted src="./assets/Mechatronics/MagLev/Demo.mov"></video>
+                            <div class="media-overlay"><span>FULLSCREEN</span></div>
+                            <span class="media-caption">Levitation Demo Video</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Mechatronics/MagLev/Simulink_main.png')">
+                            <img src="./assets/Mechatronics/MagLev/Simulink_main.png" alt="Main Simulink Model">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Main Simulink Model</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Mechatronics/MagLev/Nonlinear.png')">
+                            <img src="./assets/Mechatronics/MagLev/Nonlinear.png" alt="Nonlinear Model">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Nonlinear Model</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/Mechatronics/MagLev/Sisotool.png')">
+                            <img src="./assets/Mechatronics/MagLev/Sisotool.png" alt="Gyro Block Diagram">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Sisotool</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div id="m-fire" class="modal-overlay" onclick="closeModal('m-fire')">
         <div class="modal-box" onclick="event.stopPropagation()">
@@ -1128,7 +1238,7 @@
                         Developed a low-cost, educational line-following robot using an Arduino Uno, IR sensors, and H-Bridge drivers for motor control.
                     </p>
                     <p style="color: #ccc;">
-                        [cite_start]Implemented a PID control algorithm to enhance the robot's ability to follow lines smoothly with minimal oscillation[cite: 187]. [cite_start]Designed the system to be a hands-on teaching tool for demonstrating robotics and control systems in educational settings[cite: 188].
+                        Implemented a PID control algorithm to enhance the robot's ability to follow lines smoothly with minimal oscillation. Designed the system to be a hands-on teaching tool for demonstrating robotics and control systems in educational settings.
                     </p>
                 </div>
                 
@@ -1160,14 +1270,107 @@
         </div>
     </div>
 
-    <div id="m-cad" class="modal-overlay" onclick="closeModal('m-cad')">
+<div id="m-cad" class="modal-overlay" onclick="closeModal('m-cad')">
         <div class="modal-box" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal('m-cad')">×</button>
             <h3 class="highlight-orange">Engineering Graphics & CAD</h3>
-            <p class="mono" style="margin-bottom: 20px;">Siemens NX | 3D Modeling</p>
+            <p class="mono" style="margin-bottom: 20px;">Siemens NX | 3D Modeling | Engineering Design</p>
             <div class="modal-split">
-                <div><p style="color: #ccc;">Utilized Siemens NX to create detailed solid models of engineering designs.</p></div>
-                <div class="placeholder-media">[ CAD Render ]</div>
+                <div>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Utilized Siemens NX to create detailed solid models of engineering designs, including parts and complex assemblies. 
+                    </p>
+                    <p style="color: #ccc; margin-bottom: 15px;">
+                        Work includes visualization, orthographic and isometric free-hand sketching, and generating professional computer-aided design documentation.
+                    </p>
+                    <p style="color: #ccc;">
+                        <strong>Key Models:</strong> Garlic Press, Prop Shaft, Control Block, Tapered Drum.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--text-main); margin-bottom: 15px;">Project Gallery</h4>
+                    <div class="video-grid">
+                        
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/Garlic%20Press.png')">
+                            <img src="./assets/ENGR-1200-main/Garlic%20Press.png" alt="Garlic Press Model">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Garlic Press</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/Garlic%20Press_dwg.png')">
+                            <img src="./assets/ENGR-1200-main/Garlic%20Press_dwg.png" alt="Garlic Press Drawing">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Assembly Drawing</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/control%20block.png')">
+                            <img src="./assets/ENGR-1200-main/control%20block.png" alt="Control Block">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Control Block</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/control%20block_dwg.png')">
+                            <img src="./assets/ENGR-1200-main/control%20block_dwg.png" alt="Control Block Drawing">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Control Block Drawing</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/prop%20shaft.png')">
+                            <img src="./assets/ENGR-1200-main/prop%20shaft.png" alt="Prop Shaft">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Prop Shaft</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/prop%20shaft_dwg.png')">
+                            <img src="./assets/ENGR-1200-main/prop%20shaft_dwg.png" alt="Prop Shaft Drawing">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Prop Shaft Drawing</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/tapered%20drum.png')">
+                            <img src="./assets/ENGR-1200-main/tapered%20drum.png" alt="Tapered Drum">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Tapered Drum</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/tri-base.png')">
+                            <img src="./assets/ENGR-1200-main/tri-base.png" alt="Tri-Base">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Tri-Base</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/tri-base_dwg.png')">
+                            <img src="./assets/ENGR-1200-main/tri-base_dwg.png" alt="Tri-Base Drawing">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Tri-Base Drawing</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/link%20arm.png')">
+                            <img src="./assets/ENGR-1200-main/link%20arm.png" alt="Link Arm">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Link Arm</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/paperclip.png')">
+                            <img src="./assets/ENGR-1200-main/paperclip.png" alt="Paperclip">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Paperclip</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/carved%20blade.png')">
+                            <img src="./assets/ENGR-1200-main/carved%20blade.png" alt="Carved Blade">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Carved Blade</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/bump%20stop.png')">
+                            <img src="./assets/ENGR-1200-main/bump%20stop.png" alt="Bump Stop">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Bump Stop</span>
+                        </div>
+                        <div class="media-item" onclick="openLightbox('image', './assets/ENGR-1200-main/track%20plate.png')">
+                            <img src="./assets/ENGR-1200-main/track%20plate.png" alt="Track Plate">
+                            <div class="media-overlay"><span>VIEW IMAGE</span></div>
+                            <span class="media-caption">Track Plate</span>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1206,6 +1409,12 @@
                             <img src="./assets/Typography/Project2.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
                             <div class="media-overlay"><span>VIEW PDF</span></div>
                             <span class="media-caption">Alignment Systems</span>
+                        </div>
+
+                        <div class="media-item" onclick="openLightbox('pdf', './assets/Typography/Project 4_Final.pdf')">
+                            <img src="./assets/Typography/Project4.png" style="object-fit:contain; padding:20px; background:#222;" alt="PDF Placeholder">
+                            <div class="media-overlay"><span>VIEW PDF</span></div>
+                            <span class="media-caption">Magazine Article</span>
                         </div>
 
                     </div>
